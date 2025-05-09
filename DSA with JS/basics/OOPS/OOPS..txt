@@ -1,0 +1,202 @@
+**Object-Oriented Programming (OOP) in JavaScript - Complete Notes**
+
+---
+
+### 1. **What is OOP?**
+
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects". These objects can contain data (properties) and code (methods).
+
+---
+
+### 2. **Core Principles of OOP**
+
+#### A) **Encapsulation**
+
+* Hides internal state and requires all interaction to be performed through an object's methods.
+* Achieved using methods and private properties (e.g., `#privateProperty` in JS).
+
+```js
+class User {
+    #password;
+    constructor(password) {
+        this.#password = password;
+    }
+
+    setPassword(val) {
+        if (val.length >= 6) {
+            this.#password = val;
+        }
+    }
+
+    checkPassword(val) {
+        return val === this.#password;
+    }
+}
+```
+
+#### B) **Abstraction**
+
+* Hiding the complex implementation and showing only necessary parts.
+* JS doesn't support abstract classes natively but the pattern can be implemented.
+
+```js
+class Shape {
+    getArea() {
+        throw new Error("getArea() must be implemented");
+    }
+}
+```
+
+#### C) **Inheritance**
+
+* Allows one class (child) to inherit properties and methods from another (parent).
+
+```js
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+
+    speak() {
+        console.log(`${this.name} is speaking`);
+    }
+}
+
+class Student extends Person {
+    study() {
+        console.log(`${this.name} is studying`);
+    }
+}
+```
+
+#### D) **Polymorphism**
+
+* The ability for different classes to use the same method name with different implementations.
+
+```js
+class Media {
+    constructor(title) {
+        this.title = title;
+    }
+}
+
+class Song extends Media {
+    play() {
+        console.log(`Playing song: ${this.title}`);
+    }
+}
+
+class Video extends Media {
+    play() {
+        console.log(`Playing video: ${this.title}`);
+    }
+}
+
+const items = [new Song("Song 1"), new Video("Video 1")];
+items.forEach(item => item.play());
+```
+
+---
+
+### 3. **Other Important Concepts**
+
+#### A) **Classes and Objects**
+
+* Classes are blueprints. Objects are instances.
+
+```js
+class Car {
+    constructor(brand) {
+        this.brand = brand;
+    }
+
+    drive() {
+        console.log(`${this.brand} is driving`);
+    }
+}
+
+const myCar = new Car("Toyota");
+myCar.drive();
+```
+
+#### B) **Getters and Setters**
+
+* Used to control access to properties.
+
+```js
+class Book {
+    constructor(title) {
+        this._title = title;
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(newTitle) {
+        if (newTitle.length > 0) {
+            this._title = newTitle;
+        }
+    }
+}
+```
+
+#### C) **Static Methods**
+
+* Called on the class itself, not instances.
+
+```js
+class MathUtils {
+    static add(a, b) {
+        return a + b;
+    }
+}
+
+console.log(MathUtils.add(2, 3)); // 5
+```
+
+#### D) **Composition**
+
+* Instead of extending a class, use smaller classes and combine them.
+
+```js
+class Camera {
+    takePhoto() {
+        console.log("Photo taken");
+    }
+}
+
+class Battery {
+    showBattery() {
+        console.log("Battery at 80%");
+    }
+}
+
+class Phone {
+    constructor() {
+        this.camera = new Camera();
+        this.battery = new Battery();
+    }
+
+    clickPhoto() {
+        this.camera.takePhoto();
+    }
+}
+```
+
+---
+
+### Summary Table:
+
+| Principle     | Description                                     |
+| ------------- | ----------------------------------------------- |
+| Encapsulation | Hide internal details using methods and `#`     |
+| Abstraction   | Hide complexity, expose only essential features |
+| Inheritance   | Child inherits from parent                      |
+| Polymorphism  | Same method name, different behavior            |
+| Composition   | Combine behaviors from multiple small classes   |
+
+---
+
+Let me know if you'd like this as a PDF or want to add interview questions/examples!
+
